@@ -1,5 +1,8 @@
 # ED06_2 - Integración de MkDocs con GitHub Pages
 
+> [!NOTE]
+> Este documento describe la tarea a realizar. En otras palabras, se trata de la descripción dada en el enunciado de la tarea.
+
 ## Introducción
 
 En este ejercicio, aprenderás a crear una documentación profesional utilizando MkDocs y a desplegarla en GitHub Pages. MkDocs es una herramienta que te permite generar sitios web de documentación a partir de archivos Markdown. Por otro lado, GitHub Pages es un servicio de GitHub que te permite alojar sitios web estáticos de manera gratuita.
