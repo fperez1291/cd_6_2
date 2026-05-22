@@ -184,4 +184,14 @@ Para automatizar el despliegue en GitHub Actions crearemos un archivo `.github/w
 
 ## Paso 7 - Configurando GitHub Actions
 
+En este paso deberemos acceder al nuestro repositorio en GitHub, entrar a la sección de configuración del repositorio (`Settings`), desplegar la lista de la opción `Actions`en la barra lateral, seleccionar la opción `General`y en la sección de `General` con nombre `Workflow permissions` se debe seleccionar la opción `Read and write permissions`.
 
+<div align="center">
+ <img src="../../../img/config_gh_actions/config_workflow_permissions.png" alt="Configurando los Workflow permissions de GitHub Actions"/>
+</div>
+
+Una vez cambiados los `Workflow permissions`, debe pulsar el botón `Save`para guardar los cambios.
+
+<div align="center">
+ <img src="../../../img/config_gh_actions/guardar_cambios.png" alt="Guardar cambios"/>
+</div>
