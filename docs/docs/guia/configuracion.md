@@ -146,4 +146,6 @@ Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado
 
 A continuación se edita el archivo `docs\index.md`: 
 
-
+<div align="center">
+ <img src="../../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
+</div>
