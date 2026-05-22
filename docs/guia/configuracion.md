@@ -195,3 +195,17 @@ Una vez cambiados los `Workflow permissions`, debe pulsar el botón `Save`para g
 <div align="center">
  <img src="../../img/config_gh_actions/guardar_cambios.png" alt="Guardar cambios"/>
 </div>
+
+## Paso 8 - Configurando GitHub Pages
+
+En este paso tenemos que acceder a la configuración de nuestro repositorio (`Settings`), luego a la sección `Pages` y, en `Source`, seleccionamos `Deploy from a branch` y elegimos `gh-pages` como rama. 
+
+<div align="center">
+ <img src="../../img/config_gh_pages/config_gh_pages.png" alt="Configuración de GitHub Pages"/>
+</div>
+
+## Paso 9 - Desplegando la documentación
+
+Hacemos commit del trabajo realizado hasta ahora y comprobamos que la documentación se despliega correctamente. 
+
+
