@@ -217,7 +217,8 @@ docker exec -it nombre-contenedor sh
 
 ## Buenas Prácticas en el Despliegue
 
-!!! tip 
+!!! tip
+
     **Recomendaciones**
 
     - Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
