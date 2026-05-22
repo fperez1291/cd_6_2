@@ -12,7 +12,7 @@ Este ejemplo representa un caso de uso real y habitual en entornos de desarrollo
 
 ## Estructura del Proyecto
 
-```
+```text
 mi-app-docker/
 ├── docker-compose.yml
 ├── .env
@@ -229,7 +229,7 @@ docker compose ps
 
 La salida esperada debería ser similar a:
 
-```
+```text
 NAME              IMAGE                    STATUS          PORTS
 proxy             nginx:stable-alpine      Up              0.0.0.0:80->80/tcp
 backend           mi-app-docker-backend    Up              3000/tcp
