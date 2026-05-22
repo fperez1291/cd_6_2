@@ -188,7 +188,7 @@ sudo ufw allow 8080/tcp
 sudo ufw status
 ```
 
-> [!INFO] **Docker y UFW**
+> :memo: "Docker y UFW"
 > Docker modifica directamente las reglas de `iptables`, lo que puede saltarse las reglas de UFW. Consulta la [documentación oficial](https://docs.docker.com/) para configurar esto correctamente en entornos de producción.
 
 ---
