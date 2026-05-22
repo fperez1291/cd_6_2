@@ -215,18 +215,14 @@ docker exec -it nombre-contenedor sh
 
 ---
 
-## Buenas Prácticas en el Despliegue
+## Buenas Prácticas en el Despliegue: Recomendaciones
 
-!!! tip
-
-    **Recomendaciones**
-
-    - Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
-    - Define **políticas de reinicio** (`restart: unless-stopped`) para mayor resiliencia.
-    - Almacena los datos persistentes en **volúmenes**, nunca en el sistema de archivos del contenedor.
-    - Utiliza **redes personalizadas** para aislar los servicios entre sí.
-    - Mantén el `Dockerfile` limpio: usa imágenes base ligeras (Alpine) y elimina caché de paquetes.
-    - No incluyas secretos directamente en el `docker-compose.yml`; usa archivos `.env` o secretos de Docker Swarm.
+- Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
+- Define **políticas de reinicio** (`restart: unless-stopped`) para mayor resiliencia.
+- Almacena los datos persistentes en **volúmenes**, nunca en el sistema de archivos del contenedor.
+- Utiliza **redes personalizadas** para aislar los servicios entre sí.
+- Mantén el `Dockerfile` limpio: usa imágenes base ligeras (Alpine) y elimina caché de paquetes.
+- No incluyas secretos directamente en el `docker-compose.yml`; usa archivos `.env` o secretos de Docker Swarm.
 
 ---
 
