@@ -1,275 +1,232 @@
-# Despliegue de la Documentación
+# Despliegue de Aplicaciones con Docker
 
-En esta sección se explica el proceso seguido para desplegar la documentación generada con MkDocs utilizando GitHub Pages y GitHub Actions.
-
----
-
-## Objetivo del Despliegue
-
-El objetivo es publicar automáticamente la documentación del proyecto en una página web accesible desde internet cada vez que se realicen cambios en la rama principal del repositorio.
-
-Para ello se utilizan las siguientes herramientas:
-
-- **MkDocs** → Generador de documentación estática.
-- **GitHub Pages** → Servicio de alojamiento web estáico de GitHub.
-- **GitHub Actions** → Sistema de automatización e integración continua.
+En esta sección aprenderás a desplegar aplicaciones usando Docker y Docker Compose, desde un contenedor simple hasta un stack completo de servicios.
 
 ---
 
-## Creación del Workflow de GitHub Actions
+## Conceptos Clave
 
-Para automatizar el despliegue, se creó el siguiente archivo:
+Antes de comenzar, es útil tener claros estos conceptos:
 
-```text
-.github/workflows/deploy.yml
-````
-
-Este archivo contiene la configuración necesaria para que GitHub ejecute automáticamente el despliegue cada vez que se haga un `push` a la rama `main`.
-
-## Contenido del archivo deploy.yml
-
-```yaml
-name: Deploy MkDocs
-on:
-  push:
-    branches: [ main ]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - run: pip install mkdocs-material
-      - run: mkdocs gh-deploy --force
-```
+- **Imagen**: Plantilla de solo lectura que define el contenido del contenedor (sistema operativo, dependencias, código).
+- **Contenedor**: Instancia en ejecución de una imagen.
+- **Dockerfile**: Archivo de texto con instrucciones para construir una imagen personalizada.
+- **Docker Compose**: Herramienta para definir y gestionar aplicaciones multi-contenedor mediante un archivo `docker-compose.yml`.
 
 ---
 
-## Explicación del Workflow
+## Despliegue de un Contenedor Simple
 
-### 1. Evento de activación
+El caso más básico es ejecutar un contenedor a partir de una imagen pública del registro de Docker Hub.
 
-```yaml
-on:
-  push:
-    branches: [ main ]
-```
-
-El despliegue se ejecutará automáticamente cada vez que se suban cambios a la rama principal (`main`).
-
----
-
-### 2. Máquina virtual
-
-```yaml
-runs-on: ubuntu-latest
-```
-
-GitHub crea una máquina virtual con Ubuntu para ejecutar las tareas del workflow.
-
----
-
-### 3. Descarga del repositorio
-
-```yaml
-- uses: actions/checkout@v2
-```
-
-Este paso descarga el contenido del repositorio dentro de la máquina virtual.
-
----
-
-### 4. Configuración de Python
-
-```yaml
-- uses: actions/setup-python@v2
-```
-
-Instala y configura Python para poder ejecutar MkDocs.
-
----
-
-### 5. Instalación de dependencias
-
-```yaml
-- run: pip install mkdocs-material
-```
-
-Se instala MkDocs junto con el tema Material necesario para generar la documentación.
-
----
-
-### 6. Despliegue automático
-
-```yaml
-- run: mkdocs gh-deploy --force
-```
-
-Este comando:
-
-- Genera el sitio web estático.
-- Crea o actualiza la rama `gh-pages`.
-- Publica automáticamente la documentación en GitHub Pages.
-
-La opción `--force` fuerza la actualización del contenido desplegado.
-
----
-
-## Configuración de Permisos
-
-Para que GitHub Actions pueda publicar contenido en la rama `gh-pages`, fue necesario modificar los permisos del repositorio.
-
-### Pasos realizados
-
-1. Acceder al repositorio en GitHub.
-2. Abrir la pestaña **Settings**.
-3. Entrar en **Actions > General**.
-4. Buscar la sección **Workflow permissions**.
-5. Seleccionar:
-
-```text
-Read and write permissions
-```
-
-6. Guardar los cambios.
-
-Sin este paso, el workflow produce errores de permisos durante el despliegue.
-
----
-
-## Configuración de GitHub Pages
-
-Después de ejecutar el workflow por primera vez, se configuró GitHub Pages.
-
-### Pasos realizados
-
-1. Abrir el repositorio en GitHub.
-2. Acceder a:
-
-```text
-Settings > Pages
-```
-
-3. En la sección **Source** seleccionar:
-
-```text
-Deploy from a branch
-```
-
-4. Elegir:
-
-  - Rama: `gh-pages`
-  - Carpeta: `/ (root)`
-
-5. Guardar los cambios.
-
----
-
-## Proceso de Publicación
-
-Una vez configurado todo el entorno, el despliegue se realiza automáticamente siguiendo este flujo:
-
-1. Se modifica la documentación localmente.
-2. Se realiza un commit.
-3. Se hace push a GitHub.
-4. GitHub Actions detecta el cambio.
-5. Se ejecuta el workflow.
-6. MkDocs genera la web.
-7. GitHub Pages publica automáticamente la documentación.
-
----
-
-## Comandos Utilizados
-
-### Añadir archivos al repositorio
+### Ejemplo: desplegar un servidor Nginx
 
 ```bash
-git add .
+docker run -d \
+  --name servidor-web \
+  -p 8080:80 \
+  --restart unless-stopped \
+  nginx:latest
 ```
 
-### Crear commit
+| Opción                     | Descripción                                                             |
+| -------------------------- | ----------------------------------------------------------------------- |
+| `-d`                       | Ejecuta el contenedor en segundo plano (detached)                       |
+| `--name`                   | Asigna un nombre al contenedor                                          |
+| `-p 8080:80`               | Mapea el puerto 8080 del host al 80 del contenedor                      |
+| `--restart unless-stopped` | Reinicia el contenedor automáticamente salvo que se detenga manualmente |
+
+Accede a `http://localhost:8080` para comprobar que Nginx está funcionando.
+
+---
+
+## Construcción de una Imagen Personalizada
+
+Si tu aplicación requiere una configuración específica, debes crear tu propia imagen usando un `Dockerfile`.
+
+### Ejemplo de Dockerfile para una app Node.js
+
+```dockerfile
+# Imagen base
+FROM node:20-alpine
+
+# Directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copiar archivos de dependencias
+COPY package*.json ./
+
+# Instalar dependencias
+RUN npm install --production
+
+# Copiar el resto del código
+COPY . .
+
+# Exponer el puerto de la aplicación
+EXPOSE 3000
+
+# Comando de inicio
+CMD ["node", "server.js"]
+```
+
+### Construir la imagen
 
 ```bash
-git commit -m "Configuración de GitHub Pages"
+docker build -t mi-app:1.0 .
 ```
 
-### Subir cambios
+### Ejecutar el contenedor
 
 ```bash
-git push origin main
+docker run -d \
+  --name mi-app \
+  -p 3000:3000 \
+  mi-app:1.0
 ```
 
 ---
 
-## Verificación del Despliegue
+## Despliegue con Docker Compose
 
-Para comprobar que el despliegue se realizó correctamente:
+Docker Compose es la opción recomendada cuando tu aplicación necesita múltiples servicios (por ejemplo, una app web + una base de datos).
 
-1. Acceder a la pestaña **Actions** del repositorio.
-2. Verificar que el workflow aparece con estado correcto.
-3. Esperar unos segundos tras finalizar el proceso.
-4. Abrir la URL de GitHub Pages.
-
-La documentación queda accesible en una dirección similar a:
+### Estructura del proyecto
 
 ```text
-https://usuario.github.io/repositorio/
+mi-proyecto/
+├── docker-compose.yml
+├── .env
+└── app/
+    ├── Dockerfile
+    └── ...
 ```
 
----
-
-## Problemas Encontrados
-
-Durante el proceso pueden aparecer algunos errores comunes:
-
-### Error de permisos
-
-**Problema:**
-
-GitHub Actions no puede hacer push a `gh-pages`.
-
-**Solución:**
-
-Activar permisos de lectura y escritura en:
-
-```text
-Settings > Actions > General
-```
-
----
-
-### Página no encontrada (404)
-
-**Problema:**
-
-GitHub Pages no muestra la documentación.
-
-**Solución:**
-
-- Verificar que la rama `gh-pages` existe.
-- Confirmar que GitHub Pages utiliza dicha rama.
-- Esperar unos minutos tras el despliegue.
-
----
-
-### MkDocs no instalado
-
-**Problema:**
-
-El workflow falla porque MkDocs no está instalado.
-
-**Solución:**
-
-Añadir la instalación dentro del workflow:
+### Ejemplo de `docker-compose.yml` completo
 
 ```yaml
-- run: pip install mkdocs-material
+version: '3.9'
+
+services:
+
+  web:
+    build: ./app
+    container_name: mi-web
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks:
+      - mi-red
+
+  db:
+    image: postgres:15-alpine
+    container_name: mi-db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - datos-db:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - mi-red
+
+volumes:
+  datos-db:
+
+networks:
+  mi-red:
+    driver: bridge
+```
+
+### Comandos principales de Docker Compose
+
+```bash
+# Levantar todos los servicios en segundo plano
+docker compose up -d
+
+# Ver el estado de los servicios
+docker compose ps
+
+# Ver los logs de todos los servicios
+docker compose logs -f
+
+# Ver los logs de un servicio concreto
+docker compose logs -f web
+
+# Detener los servicios
+docker compose down
+
+# Detener y eliminar volúmenes
+docker compose down -v
+
+# Reconstruir las imágenes y levantar
+docker compose up -d --build
 ```
 
 ---
 
-## Resultado Final
+## Actualización de un Servicio en Producción
 
-Gracias a GitHub Actions y GitHub Pages, la documentación queda publicada automáticamente cada vez que se actualiza el repositorio, permitiendo mantener una documentación profesional, accesible y siempre actualizada.
+Para actualizar una aplicación sin tiempo de inactividad:
+
+```bash
+# 1. Construir la nueva imagen
+docker build -t mi-app:2.0 .
+
+# 2. Actualizar la imagen en el compose
+# (editar docker-compose.yml para cambiar el tag a 2.0)
+
+# 3. Redeployar solo el servicio afectado
+docker compose up -d --no-deps --build web
+```
+
+---
+
+## Monitorización Básica
+
+### Ver contenedores en ejecución
+
+```bash
+docker ps
+```
+
+### Ver uso de recursos en tiempo real
+
+```bash
+docker stats
+```
+
+### Inspeccionar un contenedor
+
+```bash
+docker inspect nombre-contenedor
+```
+
+### Acceder a la shell de un contenedor
+
+```bash
+docker exec -it nombre-contenedor sh
+```
+
+---
+
+## Buenas Prácticas en el Despliegue
+
+!!! tip "Recomendaciones"
+    - Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
+    - Define **políticas de reinicio** (`restart: unless-stopped`) para mayor resiliencia.
+    - Almacena los datos persistentes en **volúmenes**, nunca en el sistema de archivos del contenedor.
+    - Utiliza **redes personalizadas** para aislar los servicios entre sí.
+    - Mantén el `Dockerfile` limpio: usa imágenes base ligeras (Alpine) y elimina caché de paquetes.
+    - No incluyas secretos directamente en el `docker-compose.yml`; usa archivos `.env` o secretos de Docker Swarm.
+
+---
+
+## Siguientes Pasos
+
+Consulta el [Ejemplo práctico](../ejemplos/ejemplo1.md) para ver un despliegue real de una aplicación web con base de datos usando Docker Compose.
