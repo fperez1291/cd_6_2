@@ -1,1 +1,8 @@
-site_name: My Docs
+site_name: Mi Documentación
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
