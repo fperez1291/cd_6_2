@@ -217,7 +217,8 @@ docker exec -it nombre-contenedor sh
 
 ## Buenas Prácticas en el Despliegue
 
-!!! tip "Recomendaciones"
+!!! tip 
+    **Recomendaciones**
 
     - Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
     - Define **políticas de reinicio** (`restart: unless-stopped`) para mayor resiliencia.
