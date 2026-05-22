@@ -135,11 +135,13 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
 ```
 
-> [!WARNING] **Seguridad**
-> Nunca subas el archivo `.env` a tu repositorio. Añádelo al `.gitignore`:
-> ```text
-> .env
-> ```
+**Seguridad**
+
+Nunca subas el archivo `.env` a tu repositorio. Añádelo al `.gitignore`:
+
+```text
+.env
+```
 
 ---
 
@@ -188,8 +190,9 @@ sudo ufw allow 8080/tcp
 sudo ufw status
 ```
 
-> :memo: "Docker y UFW"
-> Docker modifica directamente las reglas de `iptables`, lo que puede saltarse las reglas de UFW. Consulta la [documentación oficial](https://docs.docker.com/) para configurar esto correctamente en entornos de producción.
+**Docker y UFW**
+
+Docker modifica directamente las reglas de `iptables`, lo que puede saltarse las reglas de UFW. Consulta la [documentación oficial](https://docs.docker.com/) para configurar esto correctamente en entornos de producción.
 
 ---
 
