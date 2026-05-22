@@ -273,6 +273,3 @@ Añadir la instalación dentro del workflow:
 ## Resultado Final
 
 Gracias a GitHub Actions y GitHub Pages, la documentación queda publicada automáticamente cada vez que se actualiza el repositorio, permitiendo mantener una documentación profesional, accesible y siempre actualizada.
-
-```
-```
