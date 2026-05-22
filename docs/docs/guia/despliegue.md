@@ -109,9 +109,9 @@ Se instala MkDocs junto con el tema Material necesario para generar la documenta
 
 Este comando:
 
-* Genera el sitio web estático.
-* Crea o actualiza la rama `gh-pages`.
-* Publica automáticamente la documentación en GitHub Pages.
+- Genera el sitio web estático.
+- Crea o actualiza la rama `gh-pages`.
+- Publica automáticamente la documentación en GitHub Pages.
 
 La opción `--force` fuerza la actualización del contenido desplegado.
 
@@ -160,8 +160,8 @@ Deploy from a branch
 
 4. Elegir:
 
-* Rama: `gh-pages`
-* Carpeta: `/ (root)`
+  - Rama: `gh-pages`
+  - Carpeta: `/ (root)`
 
 5. Guardar los cambios.
 
@@ -248,9 +248,9 @@ GitHub Pages no muestra la documentación.
 
 **Solución:**
 
-* Verificar que la rama `gh-pages` existe.
-* Confirmar que GitHub Pages utiliza dicha rama.
-* Esperar unos minutos tras el despliegue.
+- Verificar que la rama `gh-pages` existe.
+- Confirmar que GitHub Pages utiliza dicha rama.
+- Esperar unos minutos tras el despliegue.
 
 ---
 
