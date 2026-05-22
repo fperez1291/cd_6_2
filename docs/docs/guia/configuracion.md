@@ -138,21 +138,12 @@ theme:
 
 ## Creación de la Estructura de Documentación
 
-Pasamos a crear la estructura de directorios y archivos mostrada a continuación.
-
-```console
-docs/
-├── index.md
-├── guia/
-│   ├── instalacion.md
-│   ├── configuracion.md
-│   └── despliegue.md
-└── ejemplos/
-    └── ejemplo1.md
-```
-
-Se muestra la estructura de directorios creada a continuación.
+Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado.
 
 <div align="center">
- <img src="" alt=""/>
+ <img src="../../../img/estructura_doc/estructura.png" alt="Estructura de directorios y archivos resultante"/>
 </div>
+
+A continuación se edita el archivo `docs\index.md`: 
+
+
