@@ -12,25 +12,25 @@ Para instalar Python debe seguir los pasos siguientes:
 2. Ejecutar el archivo de instalación `python-manager-26.2.msix`. Le aparecerá la siguiente ventana.
 
 <div align="center">
- <img src="../../../img/python/python-installer-1.png" alt="python-installer-1"/>
+ <img src="../../../img/config_python/python-installer-1.png" alt="python-installer-1"/>
 </div>
 
 3. Pulse el botón `Instalar Python` para continuar. Cuando el instalador termine, se abrirá una terminal como la que se muestra a continuación. 
 
 <div align="center">
- <img src="../../../img/python/python-manager-terminal.png" alt="python-manager-terminal"/>
+ <img src="../../../img/config_python/python-manager-terminal.png" alt="python-manager-terminal"/>
 </div>
 
 4. A continuación, pulse `y` a las dos preguntas que le hará el manager de configurción para instalar Python y configurar automáticamente la variable PATH.
 
 <div align="center">
- <img src="../../../img/python/python-manager-installation.png" alt="python-manager-installation"/>
+ <img src="../../../img/config_python/python-manager-installation.png" alt="python-manager-installation"/>
 </div>
 
 5. Para finalizar, debe pulsar `Enter` o `n` para rechazar la visualización de la ayuda online.
 
 <div align="center">
- <img src="../../../img/python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
+ <img src="../../../img/config_python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
 </div>
 
 Para comprobar que la instalación se ha completado correctaemnte, puede ejecutar en la consola el siguiente comando:
@@ -149,3 +149,5 @@ A continuación se edita el archivo `docs\index.md`:
 <div align="center">
  <img src="../../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
 </div>
+
+En este punto también se pide 
