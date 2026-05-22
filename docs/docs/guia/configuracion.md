@@ -174,4 +174,14 @@ Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://g
  <img src="../../../img/repo_github/commit_gitignore.png" alt="Prueba - commit del archivo docs/.gitignore"/>
 </div>
 
+## Paso 6 - Automatización del despliegue: GitHub Actions
+
+Para automatizar el despliegue en GitHub Actions crearemos un archivo `.github/workflows/deploy.yml` en el directorio raíz dek repositorio.
+
+<div align="center">
+ <img src="../../../img/automatizacion_gh_actions/archivo_deploy.png" alt="Archivo .github/workflows/deploy.yml"/>
+</div>
+
+## Paso 7 - Configurando GitHub Actions
+
 
