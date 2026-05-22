@@ -1,130 +1,36 @@
-# Configuración
+Aquí tienes un contenido bastante completo y coherente para `docs/guia/configuracion.md`, siguiendo el estilo de los otros archivos y orientado a la configuración de MkDocs, Git y GitHub Pages.
 
-> [!NOTE]
-> En algunas imágenes se ha censurado la ruta de directorios y archivos de forma parcial por cuestiones de seguridad.
+````markdown id="8m2x5c"
+# Configuración del Proyecto
 
-## Paso previo - Instalación de Python
+En esta sección se describe el proceso de configuración del proyecto de documentación utilizando MkDocs, el tema Material y GitHub.
 
-Para instalar Python debe seguir los pasos siguientes:
+---
 
-1. Descargar el `Python installer manager` de la [página web oficial](https://www.python.org/downloads/).
+## Configuración Inicial de MkDocs
 
-2. Ejecutar el archivo de instalación `python-manager-26.2.msix`. Le aparecerá la siguiente ventana.
+Después de instalar MkDocs y crear el proyecto, se configuró el archivo principal:
 
-<div align="center">
- <img src="../../img/config_python/python-installer-1.png" alt="python-installer-1"/>
-</div>
+```text id="y3w0tn"
+mkdocs.yml
+````
 
-3. Pulse el botón `Instalar Python` para continuar. Cuando el instalador termine, se abrirá una terminal como la que se muestra a continuación.
+Este archivo controla el comportamiento general de la documentación.
 
-<div align="center">
- <img src="../../img/config_python/python-manager-terminal.png" alt="python-manager-terminal"/>
-</div>
+---
 
-4. A continuación, pulse `y` a las dos preguntas que le hará el manager de configuración para instalar Python y configurar automáticamente la variable PATH.
+## Configuración Básica
 
-<div align="center">
- <img src="../../img/config_python/python-manager-installation.png" alt="python-manager-installation"/>
-</div>
+Se modificó el archivo `mkdocs.yml` para utilizar el tema Material y habilitar algunas funcionalidades adicionales.
 
-5. Para finalizar, debe pulsar `Enter` o `n` para rechazar la visualización de la ayuda online.
+## Contenido del archivo mkdocs.yml
 
-<div align="center">
- <img src="../../img/config_python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
-</div>
-
-Para comprobar que la instalación se ha completado correctamente, puede ejecutar en la consola el siguiente comando:
-
-```bash
-python --version
-```
-
-Si todo está en orden, se mostrará la siguiente salida:
-
-```console
-> python --version
-Python 3.14.5
-```
-
-## Paso 1 - Configuración del Entorno
-
-1. Creamos el directorio `docs\` y nos posicionamos en él.
-
-<div align="center">
- <img src="../../img/config_entorno/crear_dir_docs.png" alt="Creación del directorio docs/ por consola"/>
-</div>
-
-2. Creamos el entorno virtual de Python con el comando `python -m venv venv`.
-
-<div align="center">
- <img src="../../img/config_entorno/crear_entorno_virtual_python.png" alt="Creación del entorno virtual de Python"/>
-</div>
-
-3. Activamos el entorno virtual mediante el comando `venv\Scripts\activate`. Al ejecutar el comando, se obtiene la siguiente respuesta:
-
-<div align="center">
- <img src="../../img/config_entorno/activar_entorno_error_1.png" alt="Error al ejecutar venv\Scripts\activate"/>
-</div>
-
-Para solventarlo, se tiene en cuenta la siguiente información obtenida en una búsqueda de Brave (respuesta proporcionada por Leo, el agente de IA de Brave):
-
-> [!NOTE]
-> `venv\Scripts\activate` : la ejecución de scripts está deshabilitada en este sistema
-> 
-> Este error ocurre porque **PowerShell** tiene por defecto una directiva de ejecución restrictiva que impide cargar scripts no firmados, como `Activate.ps1`. La solución más segura y recomendada es cambiar la política de ejecución para el usuario actual permitiendo scripts locales no firmados, pero exigiendo firma para los descargados de internet.
-> 
-> Abre PowerShell (preferiblemente como administrador si el cambio no surte efecto en la sesión actual) y ejecuta el siguiente comando:
-> 
-> ```powershell
-> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-> ```
-> 
-> Al ejecutarlo, confirma el cambio escribiendo **S** o **A**. Una vez aplicado, puedes activar tu entorno virtual normalmente con `.\venv\Scripts\Activate.ps1`.
-> 
-> Si no deseas modificar la política global de PowerShell, una alternativa es cambiar el terminal predeterminado en tu editor (como VS Code) al **Símbolo del sistema (CMD)**, ya que utiliza el script `activate.bat`, el cual no está sujeto a estas restricciones de PowerShell.
-
-Procedemos a seguir los pasos dados por Leo AI y obtenemos el siguiente problema:
-
-<div align="center">
- <img src="../../img/config_entorno/activar_entorno_error_2.png" alt=""/>
-</div>
-
-Para solucionarlo, simplemente editamos la carpeta que contiene los corchetes y ejecutamos de nuevo el comando `venv\Scripts\activate`:
-
-<div align="center">
- <img src="../../img/config_entorno/entorno_activado.png" alt="Entorno activado"/>
-</div>
-
-4. Instalamos MkDocs y el tema Material.
-
-<div align="center">
- <img src="../../img/config_entorno/instalacion_mkdocs_material.png" alt="Instalación de mkdocs y mkdocs-material"/>
-</div>
-
-Con esto ya tenemos el entorno creado, activo y preparado para crear el proyecto MkDocs.
-
-## Paso 2 - Creación del Proyecto MkDocs
-
-Para inicializar el proyecto MkDocs ejecutamos el siguiente comando:
-
-```console
-mkdocs new .
-```
-
-Tras su ejecución, la estructura del proyecto debería tener el siguiente aspecto:
-
-<div align="center">
- <img src="../../img/config_mkdocs/incializacion_mkdocs.png" alt="Inicialización del proyecto MkDocs"/>
-</div>
-
-## Paso 3 - Configuración de MkDocs
-
-Para configurar el MkDocs, insertamos el fragmento siguiente en el archivo `mkdocs.yml`, configurando así el tema Material.
-
-```yml
+```yaml id="i1n6cx"
 site_name: Mi Documentación
+
 theme:
   name: material
+
   features:
     - navigation.tabs
     - navigation.sections
@@ -132,80 +38,335 @@ theme:
     - content.code.copy
 ```
 
-<div align="center">
- <img src="../../img/config_mkdocs/config_mkdocs_yml.png" alt="Configuración del archivo mkdocs.yml"/>
-</div>
+---
 
-## Paso 4 - Creación de la Estructura de Documentación
+## Explicación de la Configuración
 
-Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado.
+### site_name
 
-<div align="center">
- <img src="../../img/estructura_doc/estructura.png" alt="Estructura de directorios y archivos resultante"/>
-</div>
+```yaml id="0q8g3h"
+site_name: Mi Documentación
+```
 
-A continuación se edita el archivo `docs\index.md`:
+Define el nombre principal que aparece en la parte superior de la página web.
 
-<div align="center">
- <img src="../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
-</div>
+---
 
-En este punto también se pide rellenar los archivos `despliegue.md` e `instalacion.md` con algún contenido. Puede comprobar que ambos tienen contenido, el cuál ha sido generado con el chatbot de IA generativa ChatGPT.
+### Tema Material
 
-## Paso 5 - Creación del repositorio en GitHub
+```yaml id="dbx8b2"
+theme:
+  name: material
+```
 
-1. **Inicialización del repositorio en GitHub.** En este punto, debemos crear el repositorio remoto en GitHub para subir el contenido de esta documentación. En mi caso, como ya lo he hecho previamente, se muestra una prueba de ello.
+Permite utilizar el tema Material para MkDocs, proporcionando:
 
-<div align="center">
- <img src="../../img/repo_github/prueba_repo_github_vscode.png" alt="Prueba del repo creado en GitHub"/>
-</div>
+* Diseño moderno.
+* Navegación mejorada.
+* Compatibilidad móvil.
+* Mejor presentación visual.
 
-Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://github.com/fperez1291/cd_6_2).
+---
 
-2. **Archivo `.gitignore`.** Se crea un archivo `.gitignore` para que git ignore la carpeta `venv\` junto con su contenido (el entorno virtual).
+## Funcionalidades Activadas
 
-<div align="center">
- <img src="../../img/repo_github/archivo_gitignore.png" alt=""/>
-</div>
+### Navegación por pestañas
 
-3. **Primer commit.** Como ya he mencionado, esta documentación ya está subida a GitHub. Sin embargo, se muestra el próximo commit:
+```yaml id="5b7p2d"
+- navigation.tabs
+```
 
-<div align="center">
- <img src="../../img/repo_github/commit_gitignore.png" alt="Prueba - commit del archivo docs/.gitignore"/>
-</div>
+Muestra la navegación superior mediante pestañas.
 
-## Paso 6 - Automatización del despliegue: GitHub Actions
+---
 
-Para automatizar el despliegue en GitHub Actions crearemos un archivo `.github/workflows/deploy.yml` en el directorio raíz dek repositorio.
+### Navegación por secciones
 
-<div align="center">
- <img src="../../img/automatizacion_gh_actions/archivo_deploy.png" alt="Archivo .github/workflows/deploy.yml"/>
-</div>
+```yaml id="q9k5vw"
+- navigation.sections
+```
 
-## Paso 7 - Configurando GitHub Actions
+Agrupa automáticamente el contenido en secciones organizadas.
 
-En este paso deberemos acceder al nuestro repositorio en GitHub, entrar a la sección de configuración del repositorio (`Settings`), desplegar la lista de la opción `Actions`en la barra lateral, seleccionar la opción `General`y en la sección de `General` con nombre `Workflow permissions` se debe seleccionar la opción `Read and write permissions`.
+---
 
-<div align="center">
- <img src="../../img/config_gh_actions/config_workflow_permissions.png" alt="Configurando los Workflow permissions de GitHub Actions"/>
-</div>
+### Expansión automática del menú
 
-Una vez cambiados los `Workflow permissions`, debe pulsar el botón `Save`para guardar los cambios.
+```yaml id="2j9fqp"
+- navigation.expand
+```
 
-<div align="center">
- <img src="../../img/config_gh_actions/guardar_cambios.png" alt="Guardar cambios"/>
-</div>
+Mantiene desplegado el árbol de navegación lateral.
 
-## Paso 8 - Configurando GitHub Pages
+---
 
-En este paso tenemos que acceder a la configuración de nuestro repositorio (`Settings`), luego a la sección `Pages` y, en `Source`, seleccionamos `Deploy from a branch` y elegimos `gh-pages` como rama. 
+### Botón de copiar código
 
-<div align="center">
- <img src="../../img/config_gh_pages/config_gh_pages.png" alt="Configuración de GitHub Pages"/>
-</div>
+```yaml id="vw91l7"
+- content.code.copy
+```
 
-## Paso 9 - Desplegando la documentación
+Añade un botón para copiar fácilmente bloques de código.
 
-Hacemos commit del trabajo realizado hasta ahora y comprobamos que la documentación se despliega correctamente. 
+---
 
+## Organización de la Documentación
 
+Se creó una estructura organizada dentro de la carpeta `docs`.
+
+## Estructura utilizada
+
+```text id="1m44sa"
+docs/
+├── index.md
+├── guia/
+│   ├── instalacion.md
+│   ├── configuracion.md
+│   └── despliegue.md
+└── ejemplos/
+    └── ejemplo1.md
+```
+
+---
+
+## Descripción de la Estructura
+
+### index.md
+
+Página principal de la documentación.
+
+### guia/
+
+Contiene las páginas principales del tutorial:
+
+* Instalación
+* Configuración
+* Despliegue
+
+### ejemplos/
+
+Incluye ejemplos prácticos o demostraciones adicionales.
+
+---
+
+## Configuración de la Página Principal
+
+Se editó el archivo:
+
+```text id="5d57qk"
+docs/index.md
+```
+
+Con contenido similar al siguiente:
+
+```markdown id="n4x4lk"
+# Bienvenido a Mi Documentación
+
+Esta es la página principal de mi documentación.
+
+## Contenido
+
+- [Guía de Instalación](guia/instalacion.md)
+- [Configuración](guia/configuracion.md)
+- [Despliegue](guia/despliegue.md)
+```
+
+---
+
+## Configuración del Repositorio Git
+
+Para controlar versiones del proyecto, se inicializó un repositorio Git.
+
+### Inicialización
+
+```bash id="4jv9f5"
+git init
+```
+
+---
+
+## Archivo .gitignore
+
+Se creó un archivo `.gitignore` para evitar subir archivos innecesarios al repositorio.
+
+## Contenido del archivo
+
+```text id="dr2l0r"
+venv/
+```
+
+Esto evita incluir el entorno virtual dentro del repositorio remoto.
+
+---
+
+## Primer Commit
+
+Una vez configurado el proyecto, se realizó el primer commit.
+
+### Añadir archivos
+
+```bash id="h3wpn7"
+git add .
+```
+
+### Crear commit
+
+```bash id="6k5n9m"
+git commit -m "Primer commit del proyecto MkDocs"
+```
+
+---
+
+## Vinculación con GitHub
+
+Después del commit inicial, el repositorio local se conectó con GitHub.
+
+### Añadir repositorio remoto
+
+```bash id="y3kg8w"
+git remote add origin https://github.com/usuario/repositorio.git
+```
+
+### Subir proyecto
+
+```bash id="7z0xcl"
+git push -u origin main
+```
+
+---
+
+## Configuración de GitHub Pages
+
+Para publicar la documentación, se configuró GitHub Pages desde la configuración del repositorio.
+
+### Pasos realizados
+
+1. Acceder a **Settings**.
+2. Entrar en **Pages**.
+3. Seleccionar:
+
+```text id="g5s9x2"
+Deploy from a branch
+```
+
+4. Elegir la rama:
+
+```text id="2z2x7d"
+gh-pages
+```
+
+---
+
+## Configuración de GitHub Actions
+
+Se configuró GitHub Actions para automatizar el despliegue de la documentación.
+
+El workflow utilizado se almacenó en:
+
+```text id="3x8j1r"
+.github/workflows/deploy.yml
+```
+
+Este archivo automatiza:
+
+* Instalación de dependencias.
+* Generación de la documentación.
+* Publicación en GitHub Pages.
+
+---
+
+## Personalización Visual
+
+El tema Material permite añadir múltiples opciones de personalización.
+
+Algunas opciones adicionales que pueden configurarse son:
+
+```yaml id="n7b4ya"
+theme:
+  palette:
+    primary: blue
+    accent: indigo
+```
+
+Esto modifica los colores principales de la documentación.
+
+---
+
+## Vista Previa de la Documentación
+
+Durante el desarrollo se utilizó el servidor local de MkDocs para comprobar cambios en tiempo real.
+
+### Ejecutar servidor
+
+```bash id="m0r9pz"
+mkdocs serve
+```
+
+---
+
+## Verificación del Funcionamiento
+
+Para comprobar que toda la configuración funcionaba correctamente, se realizaron las siguientes verificaciones:
+
+* El servidor local iniciaba sin errores.
+* Las páginas Markdown se visualizaban correctamente.
+* La navegación funcionaba.
+* Git detectaba cambios correctamente.
+* GitHub Actions completaba el despliegue.
+* GitHub Pages mostraba la documentación publicada.
+
+---
+
+## Problemas Encontrados
+
+### Error en rutas Markdown
+
+**Problema:**
+
+Algunos enlaces internos no funcionaban.
+
+**Solución:**
+
+Verificar que las rutas relativas entre archivos eran correctas.
+
+---
+
+### Error en GitHub Actions
+
+**Problema:**
+
+El workflow fallaba durante el despliegue.
+
+**Solución:**
+
+Comprobar permisos de escritura en:
+
+```text id="8c9xwp"
+Settings > Actions > General
+```
+
+---
+
+### Cambios no visibles en GitHub Pages
+
+**Problema:**
+
+La web no se actualizaba inmediatamente.
+
+**Solución:**
+
+Esperar unos minutos y limpiar la caché del navegador.
+
+---
+
+## Resultado Final
+
+Tras completar toda la configuración:
+
+* MkDocs quedó configurado correctamente.
+* El tema Material funcionó sin errores.
+* Git y GitHub permitieron controlar versiones.
+* GitHub Actions automatizó el despliegue.
+* GitHub Pages publicó correctamente la documentación.
+
+Con esto quedó finalizada la configuración completa del proyecto de documentación.

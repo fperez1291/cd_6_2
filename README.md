@@ -172,7 +172,7 @@ Abre tu repositorio en GitHub y sigue estos pasos para configurar GitHub Pages:
 
 1. Ve a la configuración de tu repositorio en GitHub.
 
-![Sección Configuración](img/readme/configuracion.png)
+![Sección Configuración](img/configuracion.png)
 
 1. Navega a la sección "Pages".
 2. En "Source", selecciona `Deploy from a branch`, y elige `gh-pages` como rama. Guarda los cambios.
@@ -189,7 +189,7 @@ git push origin main
 
 1. Ve a la sección "Actions" de tu repositorio para ver el progreso del despliegue.
 
-![Sección Actions](img/readme/gh-actions.png)
+![Sección Actions](img/gh-actions.png)
 
 1. Una vez completado, tu documentación estará disponible en:
 
@@ -199,7 +199,7 @@ https://tu-usuario.github.io/tu-repositorio
 
 Es posible que surja algún error en el despliegue si no se han seguido correctamente los pasos anteriores. En ese caso, revisa los mensajes de error en la sección "Actions" de tu repositorio para identificar el problema.
 
-![Error en Actions](img/readme/gh-actions-error.png)
+![Error en Actions](img/gh-actions-error.png)
 
 El despliegue puede demorarse unos segundos, así que comprueba que el despliegue se ha realizado correctamente después de 30 o 60 segundos.
 
