@@ -1,369 +1,199 @@
-# Configuración del Proyecto
+# Configuración del Servidor Docker
 
-En esta sección se describe el proceso de configuración del proyecto de documentación utilizando MkDocs, el tema Material y GitHub.
-
----
-
-## Configuración Inicial de MkDocs
-
-Después de instalar MkDocs y crear el proyecto, se configuró el archivo principal:
-
-```text
-mkdocs.yml
-````
-
-Este archivo controla el comportamiento general de la documentación.
+Una vez instalado Docker, es importante configurarlo correctamente para garantizar un entorno seguro, eficiente y bien organizado. En esta guía se cubren las configuraciones más habituales para un servidor Docker.
 
 ---
 
-## Configuración Básica
+## Configuración del Daemon de Docker
 
-Se modificó el archivo `mkdocs.yml` para utilizar el tema Material y habilitar algunas funcionalidades adicionales.
+El **daemon de Docker** (`dockerd`) es el proceso en segundo plano que gestiona contenedores, imágenes, redes y volúmenes. Su comportamiento se controla mediante el archivo `/etc/docker/daemon.json`.
 
-## Contenido del archivo mkdocs.yml
-
-```yaml
-site_name: Mi Documentación
-
-theme:
-  name: material
-
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.expand
-    - content.code.copy
-```
-
----
-
-## Explicación de la Configuración
-
-### site_name
-
-```yaml
-site_name: Mi Documentación
-```
-
-Define el nombre principal que aparece en la parte superior de la página web.
-
----
-
-### Tema Material
-
-```yaml
-theme:
-  name: material
-```
-
-Permite utilizar el tema Material para MkDocs, proporcionando:
-
-- Diseño moderno.
-- Navegación mejorada.
-- Compatibilidad móvil.
-- Mejor presentación visual.
-
----
-
-## Funcionalidades Activadas
-
-### Navegación por pestañas
-
-```yaml
-- navigation.tabs
-```
-
-Muestra la navegación superior mediante pestañas.
-
----
-
-### Navegación por secciones
-
-```yaml
-- navigation.sections
-```
-
-Agrupa automáticamente el contenido en secciones organizadas.
-
----
-
-### Expansión automática del menú
-
-```yaml
-- navigation.expand
-```
-
-Mantiene desplegado el árbol de navegación lateral.
-
----
-
-### Botón de copiar código
-
-```yaml
-- content.code.copy
-```
-
-Añade un botón para copiar fácilmente bloques de código.
-
----
-
-## Organización de la Documentación
-
-Se creó una estructura organizada dentro de la carpeta `docs`.
-
-## Estructura utilizada
-
-```text
-docs/
-├── index.md
-├── guia/
-│   ├── instalacion.md
-│   ├── configuracion.md
-│   └── despliegue.md
-└── ejemplos/
-    └── ejemplo1.md
-```
-
----
-
-## Descripción de la Estructura
-
-### index.md
-
-Página principal de la documentación.
-
-### guia/
-
-Contiene las páginas principales del tutorial:
-
-- Instalación
-- Configuración
-- Despliegue
-
-### ejemplos/
-
-Incluye ejemplos prácticos o demostraciones adicionales.
-
----
-
-## Configuración de la Página Principal
-
-Se editó el archivo:
-
-```text
-docs/index.md
-```
-
-Con contenido similar al siguiente:
-
-```markdown
-# Bienvenido a Mi Documentación
-
-Esta es la página principal de mi documentación.
-
-## Contenido
-
-- [Guía de Instalación](guia/instalacion.md)
-- [Configuración](guia/configuracion.md)
-- [Despliegue](guia/despliegue.md)
-```
-
----
-
-## Configuración del Repositorio Git
-
-Para controlar versiones del proyecto, se inicializó un repositorio Git.
-
-### Inicialización
+### Crear o editar el archivo de configuración
 
 ```bash
-git init
+sudo nano /etc/docker/daemon.json
 ```
 
----
+### Ejemplo de configuración recomendada
 
-## Archivo .gitignore
-
-Se creó un archivo `.gitignore` para evitar subir archivos innecesarios al repositorio.
-
-## Contenido del archivo
-
-```text
-venv/
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  },
+  "storage-driver": "overlay2",
+  "default-address-pools": [
+    { "base": "172.20.0.0/16", "size": 24 }
+  ],
+  "live-restore": true
+}
 ```
 
-Esto evita incluir el entorno virtual dentro del repositorio remoto.
+| Parámetro        | Descripción                                                |
+| ---------------- | ---------------------------------------------------------- |
+| `log-driver`     | Define el controlador de logs (por defecto `json-file`)    |
+| `max-size`       | Tamaño máximo de cada archivo de log                       |
+| `max-file`       | Número máximo de archivos de log rotados                   |
+| `storage-driver` | Motor de almacenamiento (recomendado `overlay2`)           |
+| `live-restore`   | Mantiene los contenedores activos si el daemon se reinicia |
 
----
-
-## Primer Commit
-
-Una vez configurado el proyecto, se realizó el primer commit.
-
-### Añadir archivos
+### Aplicar los cambios
 
 ```bash
-git add .
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 ```
 
-### Crear commit
+---
+
+## Gestión de Redes en Docker
+
+Docker crea automáticamente tres redes por defecto: `bridge`, `host` y `none`. Para proyectos más complejos, es recomendable crear redes personalizadas.
+
+### Crear una red personalizada
 
 ```bash
-git commit -m "Primer commit del proyecto MkDocs"
+docker network create \
+  --driver bridge \
+  --subnet 172.20.0.0/24 \
+  --gateway 172.20.0.1 \
+  mi-red
 ```
 
----
-
-## Vinculación con GitHub
-
-Después del commit inicial, el repositorio local se conectó con GitHub.
-
-### Añadir repositorio remoto
+### Listar redes disponibles
 
 ```bash
-git remote add origin https://github.com/usuario/repositorio.git
+docker network ls
 ```
 
-### Subir proyecto
+### Conectar un contenedor a una red
 
 ```bash
-git push -u origin main
+docker network connect mi-red nombre-contenedor
 ```
 
 ---
 
-## Configuración de GitHub Pages
+## Gestión de Volúmenes
 
-Para publicar la documentación, se configuró GitHub Pages desde la configuración del repositorio.
+Los volúmenes permiten **persistir datos** más allá del ciclo de vida de un contenedor. Son la forma recomendada de almacenar datos en Docker.
 
-### Pasos realizados
+### Crear un volumen
 
-1. Acceder a **Settings**.
-2. Entrar en **Pages**.
-3. Seleccionar:
-
-```text
-Deploy from a branch
+```bash
+docker volume create mi-volumen
 ```
 
-4. Elegir la rama:
+### Listar volúmenes existentes
 
-```text
-gh-pages
+```bash
+docker volume ls
+```
+
+### Inspeccionar un volumen
+
+```bash
+docker volume inspect mi-volumen
+```
+
+### Montar un volumen en un contenedor
+
+```bash
+docker run -d \
+  --name mi-app \
+  -v mi-volumen:/datos \
+  imagen:tag
 ```
 
 ---
 
-## Configuración de GitHub Actions
+## Variables de Entorno y Archivos `.env`
 
-Se configuró GitHub Actions para automatizar el despliegue de la documentación.
+Es una buena práctica gestionar la configuración sensible mediante variables de entorno, evitando incluirla directamente en el código o en los archivos `docker-compose.yml`.
 
-El workflow utilizado se almacenó en:
+### Crear un archivo `.env`
 
-```text
-.github/workflows/deploy.yml
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=mi_base_datos
+DB_USER=admin
+DB_PASSWORD=contraseña_segura
 ```
 
-Este archivo automatiza:
-
-* Instalación de dependencias.
-* Generación de la documentación.
-* Publicación en GitHub Pages.
-
----
-
-## Personalización Visual
-
-El tema Material permite añadir múltiples opciones de personalización.
-
-Algunas opciones adicionales que pueden configurarse son:
+### Referenciar variables en `docker-compose.yml`
 
 ```yaml
-theme:
-  palette:
-    primary: blue
-    accent: indigo
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
 ```
 
-Esto modifica los colores principales de la documentación.
+!!! warning "Seguridad"
+    Nunca subas el archivo `.env` a tu repositorio. Añádelo al `.gitignore`:
+
+    ```text
+    .env
+    ```
 
 ---
 
-## Vista Previa de la Documentación
+## Límites de Recursos
 
-Durante el desarrollo se utilizó el servidor local de MkDocs para comprobar cambios en tiempo real.
+Es recomendable establecer límites de CPU y memoria para los contenedores en entornos de producción, evitando que un contenedor consuma todos los recursos del host.
 
-### Ejecutar servidor
+### Mediante `docker run`
 
 ```bash
-mkdocs serve
+docker run -d \
+  --name mi-app \
+  --memory="512m" \
+  --cpus="1.0" \
+  imagen:tag
+```
+
+### Mediante `docker-compose.yml`
+
+```yaml
+services:
+  mi-app:
+    image: imagen:tag
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
 ```
 
 ---
 
-## Verificación del Funcionamiento
+## Configuración del Firewall
 
-Para comprobar que toda la configuración funcionaba correctamente, se realizaron las siguientes verificaciones:
+Si estás usando Docker en un servidor, asegúrate de que el firewall permite el tráfico necesario:
 
-- El servidor local iniciaba sin errores.
-- Las páginas Markdown se visualizaban correctamente.
-- La navegación funcionaba.
-- Git detectaba cambios correctamente.
-- GitHub Actions completaba el despliegue.
-- GitHub Pages mostraba la documentación publicada.
+```bash
+# Permitir puertos HTTP y HTTPS
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
 
----
+# Permitir un puerto personalizado (ej. 8080)
+sudo ufw allow 8080/tcp
 
-## Problemas Encontrados
-
-### Error en rutas Markdown
-
-**Problema:**
-
-Algunos enlaces internos no funcionaban.
-
-**Solución:**
-
-Verificar que las rutas relativas entre archivos eran correctas.
-
----
-
-### Error en GitHub Actions
-
-**Problema:**
-
-El workflow fallaba durante el despliegue.
-
-**Solución:**
-
-Comprobar permisos de escritura en:
-
-```text
-Settings > Actions > General
+# Ver el estado del firewall
+sudo ufw status
 ```
 
----
-
-### Cambios no visibles en GitHub Pages
-
-**Problema:**
-
-La web no se actualizaba inmediatamente.
-
-**Solución:**
-
-Esperar unos minutos y limpiar la caché del navegador.
+!!! info "Docker y UFW"
+    Docker modifica directamente las reglas de `iptables`, lo que puede saltarse las reglas de UFW. Consulta la [documentación oficial](https://docs.docker.com/) para configurar esto correctamente en entornos de producción.
 
 ---
 
-## Resultado Final
+## Siguientes Pasos
 
-Tras completar toda la configuración:
-
-- MkDocs quedó configurado correctamente.
-- El tema Material funcionó sin errores.
-- Git y GitHub permitieron controlar versiones.
-- GitHub Actions automatizó el despliegue.
-- GitHub Pages publicó correctamente la documentación.
-
-Con esto quedó finalizada la configuración completa del proyecto de documentación.
+Con el entorno configurado, ya puedes proceder al [Despliegue de tu aplicación con Docker](despliegue.md).
