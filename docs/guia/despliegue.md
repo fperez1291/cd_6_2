@@ -218,6 +218,7 @@ docker exec -it nombre-contenedor sh
 ## Buenas Prácticas en el Despliegue
 
 !!! tip "Recomendaciones"
+
     - Usa siempre **tags específicos** en las imágenes (evita `:latest` en producción).
     - Define **políticas de reinicio** (`restart: unless-stopped`) para mayor resiliencia.
     - Almacena los datos persistentes en **volúmenes**, nunca en el sistema de archivos del contenedor.
