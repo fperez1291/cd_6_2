@@ -1,6 +1,3 @@
-Aquí tienes un contenido bastante completo y coherente para `docs/guia/configuracion.md`, siguiendo el estilo de los otros archivos y orientado a la configuración de MkDocs, Git y GitHub Pages.
-
-````markdown id="8m2x5c"
 # Configuración del Proyecto
 
 En esta sección se describe el proceso de configuración del proyecto de documentación utilizando MkDocs, el tema Material y GitHub.
@@ -11,7 +8,7 @@ En esta sección se describe el proceso de configuración del proyecto de docume
 
 Después de instalar MkDocs y crear el proyecto, se configuró el archivo principal:
 
-```text id="y3w0tn"
+```text
 mkdocs.yml
 ````
 
@@ -25,7 +22,7 @@ Se modificó el archivo `mkdocs.yml` para utilizar el tema Material y habilitar 
 
 ## Contenido del archivo mkdocs.yml
 
-```yaml id="i1n6cx"
+```yaml
 site_name: Mi Documentación
 
 theme:
@@ -44,7 +41,7 @@ theme:
 
 ### site_name
 
-```yaml id="0q8g3h"
+```yaml
 site_name: Mi Documentación
 ```
 
@@ -54,17 +51,17 @@ Define el nombre principal que aparece en la parte superior de la página web.
 
 ### Tema Material
 
-```yaml id="dbx8b2"
+```yaml
 theme:
   name: material
 ```
 
 Permite utilizar el tema Material para MkDocs, proporcionando:
 
-* Diseño moderno.
-* Navegación mejorada.
-* Compatibilidad móvil.
-* Mejor presentación visual.
+- Diseño moderno.
+- Navegación mejorada.
+- Compatibilidad móvil.
+- Mejor presentación visual.
 
 ---
 
@@ -72,7 +69,7 @@ Permite utilizar el tema Material para MkDocs, proporcionando:
 
 ### Navegación por pestañas
 
-```yaml id="5b7p2d"
+```yaml
 - navigation.tabs
 ```
 
@@ -82,7 +79,7 @@ Muestra la navegación superior mediante pestañas.
 
 ### Navegación por secciones
 
-```yaml id="q9k5vw"
+```yaml
 - navigation.sections
 ```
 
@@ -92,7 +89,7 @@ Agrupa automáticamente el contenido en secciones organizadas.
 
 ### Expansión automática del menú
 
-```yaml id="2j9fqp"
+```yaml
 - navigation.expand
 ```
 
@@ -102,7 +99,7 @@ Mantiene desplegado el árbol de navegación lateral.
 
 ### Botón de copiar código
 
-```yaml id="vw91l7"
+```yaml
 - content.code.copy
 ```
 
@@ -116,7 +113,7 @@ Se creó una estructura organizada dentro de la carpeta `docs`.
 
 ## Estructura utilizada
 
-```text id="1m44sa"
+```text
 docs/
 ├── index.md
 ├── guia/
@@ -139,9 +136,9 @@ Página principal de la documentación.
 
 Contiene las páginas principales del tutorial:
 
-* Instalación
-* Configuración
-* Despliegue
+- Instalación
+- Configuración
+- Despliegue
 
 ### ejemplos/
 
@@ -153,13 +150,13 @@ Incluye ejemplos prácticos o demostraciones adicionales.
 
 Se editó el archivo:
 
-```text id="5d57qk"
+```text
 docs/index.md
 ```
 
 Con contenido similar al siguiente:
 
-```markdown id="n4x4lk"
+```markdown
 # Bienvenido a Mi Documentación
 
 Esta es la página principal de mi documentación.
@@ -179,7 +176,7 @@ Para controlar versiones del proyecto, se inicializó un repositorio Git.
 
 ### Inicialización
 
-```bash id="4jv9f5"
+```bash
 git init
 ```
 
@@ -191,7 +188,7 @@ Se creó un archivo `.gitignore` para evitar subir archivos innecesarios al repo
 
 ## Contenido del archivo
 
-```text id="dr2l0r"
+```text
 venv/
 ```
 
@@ -205,13 +202,13 @@ Una vez configurado el proyecto, se realizó el primer commit.
 
 ### Añadir archivos
 
-```bash id="h3wpn7"
+```bash
 git add .
 ```
 
 ### Crear commit
 
-```bash id="6k5n9m"
+```bash
 git commit -m "Primer commit del proyecto MkDocs"
 ```
 
@@ -223,13 +220,13 @@ Después del commit inicial, el repositorio local se conectó con GitHub.
 
 ### Añadir repositorio remoto
 
-```bash id="y3kg8w"
+```bash
 git remote add origin https://github.com/usuario/repositorio.git
 ```
 
 ### Subir proyecto
 
-```bash id="7z0xcl"
+```bash
 git push -u origin main
 ```
 
@@ -245,13 +242,13 @@ Para publicar la documentación, se configuró GitHub Pages desde la configuraci
 2. Entrar en **Pages**.
 3. Seleccionar:
 
-```text id="g5s9x2"
+```text
 Deploy from a branch
 ```
 
 4. Elegir la rama:
 
-```text id="2z2x7d"
+```text
 gh-pages
 ```
 
@@ -263,7 +260,7 @@ Se configuró GitHub Actions para automatizar el despliegue de la documentación
 
 El workflow utilizado se almacenó en:
 
-```text id="3x8j1r"
+```text
 .github/workflows/deploy.yml
 ```
 
@@ -281,7 +278,7 @@ El tema Material permite añadir múltiples opciones de personalización.
 
 Algunas opciones adicionales que pueden configurarse son:
 
-```yaml id="n7b4ya"
+```yaml
 theme:
   palette:
     primary: blue
@@ -298,7 +295,7 @@ Durante el desarrollo se utilizó el servidor local de MkDocs para comprobar cam
 
 ### Ejecutar servidor
 
-```bash id="m0r9pz"
+```bash
 mkdocs serve
 ```
 
@@ -308,12 +305,12 @@ mkdocs serve
 
 Para comprobar que toda la configuración funcionaba correctamente, se realizaron las siguientes verificaciones:
 
-* El servidor local iniciaba sin errores.
-* Las páginas Markdown se visualizaban correctamente.
-* La navegación funcionaba.
-* Git detectaba cambios correctamente.
-* GitHub Actions completaba el despliegue.
-* GitHub Pages mostraba la documentación publicada.
+- El servidor local iniciaba sin errores.
+- Las páginas Markdown se visualizaban correctamente.
+- La navegación funcionaba.
+- Git detectaba cambios correctamente.
+- GitHub Actions completaba el despliegue.
+- GitHub Pages mostraba la documentación publicada.
 
 ---
 
@@ -341,7 +338,7 @@ El workflow fallaba durante el despliegue.
 
 Comprobar permisos de escritura en:
 
-```text id="8c9xwp"
+```text
 Settings > Actions > General
 ```
 
@@ -363,10 +360,10 @@ Esperar unos minutos y limpiar la caché del navegador.
 
 Tras completar toda la configuración:
 
-* MkDocs quedó configurado correctamente.
-* El tema Material funcionó sin errores.
-* Git y GitHub permitieron controlar versiones.
-* GitHub Actions automatizó el despliegue.
-* GitHub Pages publicó correctamente la documentación.
+- MkDocs quedó configurado correctamente.
+- El tema Material funcionó sin errores.
+- Git y GitHub permitieron controlar versiones.
+- GitHub Actions automatizó el despliegue.
+- GitHub Pages publicó correctamente la documentación.
 
 Con esto quedó finalizada la configuración completa del proyecto de documentación.
