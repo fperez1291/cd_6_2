@@ -1,256 +1,151 @@
-# Instalación del Entorno
+# Guía de Instalación de Docker
 
-En esta sección se describe el proceso seguido para preparar el entorno de desarrollo necesario para crear la documentación con MkDocs.
+Esta guía te llevará paso a paso por el proceso de instalación de Docker en los principales sistemas operativos.
 
----
+## ¿Qué es Docker?
+
+Docker es una plataforma de contenedores que permite empaquetar aplicaciones y sus dependencias en unidades aisladas llamadas **contenedores**. Esto garantiza que la aplicación funcione de forma idéntica en cualquier entorno, independientemente del sistema operativo o la configuración del host.
 
 ## Requisitos Previos
 
-Antes de comenzar fue necesario disponer de las siguientes herramientas instaladas en el sistema:
+Antes de instalar Docker, asegúrate de cumplir con los siguientes requisitos:
 
-- Python 3.7 o superior
-- Git
-- Visual Studio Code
-- Cuenta en GitHub
-
-Estas herramientas permiten crear la documentación, gestionar versiones del proyecto y publicar el resultado final en GitHub Pages.
+- **Sistema operativo de 64 bits**
+- **Windows 10/11** (Pro, Enterprise o Education) / **Ubuntu 20.04+** / **macOS 11+**
+- Al menos **4 GB de RAM**
+- Virtualización habilitada en la BIOS (para Windows)
 
 ---
 
-## Instalación de Python
+## Instalación en Windows
 
-MkDocs está desarrollado en Python, por lo que el primer paso consistió en instalar Python en el sistema.
+### 1. Descargar Docker Desktop
 
-### Comprobación de instalación
+Accede a la [página oficial de Docker](https://www.docker.com/products/docker-desktop/) y descarga el instalador para Windows.
 
-Para verificar que Python estaba instalado correctamente, se ejecutó el siguiente comando en la terminal:
+### 2. Ejecutar el instalador
 
-```bash id="3px91m"
-python --version
-````
+Haz doble clic en el archivo descargado (`Docker Desktop Installer.exe`) y sigue el asistente de instalación. Asegúrate de marcar la opción **"Use WSL 2 instead of Hyper-V"** si tu sistema lo permite.
 
-Si Python está instalado correctamente, aparece un resultado similar a:
+### 3. Reiniciar el sistema
 
-```text id="m7lm8s"
-Python 3.11.0
+Una vez finalizada la instalación, reinicia el equipo cuando se te solicite.
+
+### 4. Verificar la instalación
+
+Abre una terminal (PowerShell o CMD) y ejecuta:
+
+```bash
+docker --version
+docker run hello-world
 ```
+
+Si ves el mensaje de bienvenida de Docker, la instalación se ha realizado correctamente.
 
 ---
 
-## Instalación de Git
+## Instalación en Ubuntu / Debian
 
-Git es necesario para gestionar versiones y sincronizar el proyecto con GitHub.
+### 1. Actualizar los paquetes del sistema
 
-### Verificación de instalación
-
-```bash id="uwv2z5"
-git --version
+```bash
+sudo apt update
+sudo apt upgrade -y
 ```
 
-Resultado esperado:
+### 2. Instalar dependencias necesarias
 
-```text id="i2p95h"
-git version 2.x.x
+```bash
+sudo apt install -y ca-certificates curl gnupg lsb-release
 ```
 
----
+### 3. Añadir la clave GPG oficial de Docker
 
-## Creación del Proyecto
-
-Se creó una carpeta para almacenar todo el proyecto de documentación.
-
-```bash id="n4r5w0"
-mkdir mi-documentacion
-cd mi-documentacion
+```bash
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
----
+### 4. Añadir el repositorio de Docker
 
-## Creación del Entorno Virtual
-
-Para evitar conflictos entre dependencias de diferentes proyectos, se creó un entorno virtual de Python.
-
-### Crear entorno virtual
-
-```bash id="5fgm5x"
-python -m venv venv
+```bash
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
-Este comando genera una carpeta llamada `venv` que contiene una instalación aislada de Python.
+### 5. Instalar Docker Engine
 
----
-
-## Activación del Entorno Virtual
-
-Una vez creado el entorno virtual, fue necesario activarlo.
-
-### En Windows
-
-```bash id="9vrmnl"
-venv\Scripts\activate
+```bash
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-### En Linux o macOS
+### 6. Añadir tu usuario al grupo docker (opcional pero recomendado)
 
-```bash id="f9k5p0"
-source venv/bin/activate
+```bash
+sudo usermod -aG docker $USER
+newgrp docker
 ```
 
-Cuando el entorno virtual está activo, la terminal suele mostrar el nombre `(venv)` al inicio de la línea de comandos.
+### 7. Verificar la instalación
 
----
-
-## Instalación de MkDocs
-
-Con el entorno virtual activado, se instalaron MkDocs y el tema Material mediante `pip`.
-
-```bash id="6cw42q"
-pip install mkdocs mkdocs-material
+```bash
+docker --version
+docker run hello-world
 ```
 
 ---
 
-## Verificación de la Instalación
+## Instalación en macOS
 
-Para comprobar que MkDocs se instaló correctamente, se ejecutó:
+### 1. Descargar Docker Desktop para Mac
 
-```bash id="p8c3ew"
-mkdocs --version
-```
+Descarga el instalador desde la [web oficial de Docker](https://www.docker.com/products/docker-desktop/), eligiendo la versión correcta según tu procesador (**Intel** o **Apple Silicon**).
 
-Resultado esperado:
+### 2. Instalar la aplicación
 
-```text id="j1b77j"
-mkdocs, version X.X.X
-```
+Arrastra el icono de Docker a la carpeta **Aplicaciones** y ábrelo. Docker solicitará permisos de administrador durante el primer arranque.
 
----
+### 3. Verificar la instalación
 
-## Inicialización del Proyecto MkDocs
-
-Una vez instaladas las dependencias, se creó la estructura inicial del proyecto con el siguiente comando:
-
-```bash id="r5y6gx"
-mkdocs new .
-```
-
-Este comando genera automáticamente:
-
-```text id="g34q6m"
-mkdocs.yml
-docs/
+```bash
+docker --version
+docker run hello-world
 ```
 
 ---
 
-## Estructura Inicial Generada
+## Instalación de Docker Compose
 
-La estructura básica creada por MkDocs fue:
+Docker Compose permite definir y gestionar aplicaciones multi-contenedor. En versiones modernas de Docker Desktop ya viene incluido. Para verificarlo:
 
-```text id="6cm9kh"
-mi-documentacion/
-├── docs/
-│   └── index.md
-└── mkdocs.yml
+```bash
+docker compose version
 ```
 
-### Descripción de los archivos
+Si necesitas instalarlo manualmente en Linux:
 
-- `mkdocs.yml` → Archivo principal de configuración.
-- `docs/index.md` → Página principal de la documentación.
-
----
-
-## Instalación de Visual Studio Code
-
-Para facilitar la edición de archivos Markdown y la gestión del proyecto, se utilizó Visual Studio Code.
-
-### Ventajas de Visual Studio Code
-
-- Integración con Git y GitHub.
-- Terminal integrada.
-- Extensiones para Markdown.
-- Resaltado de sintaxis.
-- Vista previa de documentación.
-
----
-
-## Vista Previa Local
-
-MkDocs permite visualizar la documentación localmente antes de publicarla.
-
-### Ejecutar servidor local
-
-```bash id="ax8g40"
-mkdocs serve
-```
-
-Después de ejecutar el comando, la documentación queda disponible normalmente en:
-
-```text id="1ep7q7"
-http://127.0.0.1:8000
-```
-
-Esto permite comprobar cambios en tiempo real mientras se editan los archivos Markdown.
-
----
-
-## Problemas Encontrados
-
-Durante la instalación pueden aparecer algunos problemas comunes.
-
-### Python no reconocido
-
-**Problema:**
-
-El sistema no reconoce el comando `python`.
-
-**Solución:**
-
-Añadir Python al `PATH` durante la instalación o reinstalar Python marcando la opción:
-
-```text id="yvc5au"
-Add Python to PATH
+```bash
+sudo apt install -y docker-compose-plugin
 ```
 
 ---
 
-### Error al activar el entorno virtual en Windows
+## Solución de Problemas Comunes
 
-**Problema:**
-
-Windows bloquea la ejecución de scripts.
-
-**Solución:**
-
-Ejecutar PowerShell como administrador y usar:
-
-```powershell id="r6m6c9"
-Set-ExecutionPolicy RemoteSigned
-```
+| Problema                              | Causa probable             | Solución                                                                             |
+| ------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------ |
+| `Cannot connect to the Docker daemon` | El servicio no está activo | `sudo systemctl start docker`                                                        |
+| `Permission denied`                   | Usuario sin permisos       | Añadir al grupo `docker`                                                             |
+| `WSL 2 installation is incomplete`    | WSL 2 no configurado       | Seguir la [guía de Microsoft](https://learn.microsoft.com/es-es/windows/wsl/install) |
+| Puerto ya en uso                      | Conflicto de puertos       | Cambiar el puerto en la configuración                                                |
 
 ---
 
-### MkDocs no encontrado
+## Siguientes Pasos
 
-**Problema:**
-
-El comando `mkdocs` no funciona.
-
-**Solución:**
-
-Verificar que el entorno virtual está activado antes de instalar MkDocs.
-
----
-
-## Resultado Final
-
-Tras completar todos los pasos:
-
-- Python quedó instalado correctamente.
-- El entorno virtual fue configurado.
-- MkDocs y Material quedaron instalados.
-- La estructura inicial de documentación fue creada.
-- La documentación pudo visualizarse localmente sin errores.
-
-Con esto quedó preparado el entorno necesario para continuar con la creación y despliegue de la documentación.
+Una vez completada la instalación, continúa con la [Configuración del servidor Docker](configuracion.md) para preparar tu entorno.
