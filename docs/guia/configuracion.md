@@ -12,25 +12,25 @@ Para instalar Python debe seguir los pasos siguientes:
 2. Ejecutar el archivo de instalación `python-manager-26.2.msix`. Le aparecerá la siguiente ventana.
 
 <div align="center">
- <img src="../../../img/config_python/python-installer-1.png" alt="python-installer-1"/>
+ <img src="../../img/config_python/python-installer-1.png" alt="python-installer-1"/>
 </div>
 
 3. Pulse el botón `Instalar Python` para continuar. Cuando el instalador termine, se abrirá una terminal como la que se muestra a continuación.
 
 <div align="center">
- <img src="../../../img/config_python/python-manager-terminal.png" alt="python-manager-terminal"/>
+ <img src="../../img/config_python/python-manager-terminal.png" alt="python-manager-terminal"/>
 </div>
 
 4. A continuación, pulse `y` a las dos preguntas que le hará el manager de configuración para instalar Python y configurar automáticamente la variable PATH.
 
 <div align="center">
- <img src="../../../img/config_python/python-manager-installation.png" alt="python-manager-installation"/>
+ <img src="../../img/config_python/python-manager-installation.png" alt="python-manager-installation"/>
 </div>
 
 5. Para finalizar, debe pulsar `Enter` o `n` para rechazar la visualización de la ayuda online.
 
 <div align="center">
- <img src="../../../img/config_python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
+ <img src="../../img/config_python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
 </div>
 
 Para comprobar que la instalación se ha completado correctamente, puede ejecutar en la consola el siguiente comando:
@@ -51,19 +51,19 @@ Python 3.14.5
 1. Creamos el directorio `docs\` y nos posicionamos en él.
 
 <div align="center">
- <img src="../../../img/config_entorno/crear_dir_docs.png" alt="Creación del directorio docs/ por consola"/>
+ <img src="../../img/config_entorno/crear_dir_docs.png" alt="Creación del directorio docs/ por consola"/>
 </div>
 
 2. Creamos el entorno virtual de Python con el comando `python -m venv venv`.
 
 <div align="center">
- <img src="../../../img/config_entorno/crear_entorno_virtual_python.png" alt="Creación del entorno virtual de Python"/>
+ <img src="../../img/config_entorno/crear_entorno_virtual_python.png" alt="Creación del entorno virtual de Python"/>
 </div>
 
 3. Activamos el entorno virtual mediante el comando `venv\Scripts\activate`. Al ejecutar el comando, se obtiene la siguiente respuesta:
 
 <div align="center">
- <img src="../../../img/config_entorno/activar_entorno_error_1.png" alt="Error al ejecutar venv\Scripts\activate"/>
+ <img src="../../img/config_entorno/activar_entorno_error_1.png" alt="Error al ejecutar venv\Scripts\activate"/>
 </div>
 
 Para solventarlo, se tiene en cuenta la siguiente información obtenida en una búsqueda de Brave (respuesta proporcionada por Leo, el agente de IA de Brave):
@@ -86,19 +86,19 @@ Para solventarlo, se tiene en cuenta la siguiente información obtenida en una b
 Procedemos a seguir los pasos dados por Leo AI y obtenemos el siguiente problema:
 
 <div align="center">
- <img src="../../../img/config_entorno/activar_entorno_error_2.png" alt=""/>
+ <img src="../../img/config_entorno/activar_entorno_error_2.png" alt=""/>
 </div>
 
 Para solucionarlo, simplemente editamos la carpeta que contiene los corchetes y ejecutamos de nuevo el comando `venv\Scripts\activate`:
 
 <div align="center">
- <img src="../../../img/config_entorno/entorno_activado.png" alt="Entorno activado"/>
+ <img src="../../img/config_entorno/entorno_activado.png" alt="Entorno activado"/>
 </div>
 
 4. Instalamos MkDocs y el tema Material.
 
 <div align="center">
- <img src="../../../img/config_entorno/instalacion_mkdocs_material.png" alt="Instalación de mkdocs y mkdocs-material"/>
+ <img src="../../img/config_entorno/instalacion_mkdocs_material.png" alt="Instalación de mkdocs y mkdocs-material"/>
 </div>
 
 Con esto ya tenemos el entorno creado, activo y preparado para crear el proyecto MkDocs.
@@ -114,7 +114,7 @@ mkdocs new .
 Tras su ejecución, la estructura del proyecto debería tener el siguiente aspecto:
 
 <div align="center">
- <img src="../../../img/config_mkdocs/incializacion_mkdocs.png" alt="Inicialización del proyecto MkDocs"/>
+ <img src="../../img/config_mkdocs/incializacion_mkdocs.png" alt="Inicialización del proyecto MkDocs"/>
 </div>
 
 ## Paso 3 - Configuración de MkDocs
@@ -133,7 +133,7 @@ theme:
 ```
 
 <div align="center">
- <img src="../../../img/config_mkdocs/config_mkdocs_yml.png" alt="Configuración del archivo mkdocs.yml"/>
+ <img src="../../img/config_mkdocs/config_mkdocs_yml.png" alt="Configuración del archivo mkdocs.yml"/>
 </div>
 
 ## Paso 4 - Creación de la Estructura de Documentación
@@ -141,13 +141,13 @@ theme:
 Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado.
 
 <div align="center">
- <img src="../../../img/estructura_doc/estructura.png" alt="Estructura de directorios y archivos resultante"/>
+ <img src="../../img/estructura_doc/estructura.png" alt="Estructura de directorios y archivos resultante"/>
 </div>
 
 A continuación se edita el archivo `docs\index.md`:
 
 <div align="center">
- <img src="../../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
+ <img src="../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
 </div>
 
 En este punto también se pide rellenar los archivos `despliegue.md` e `instalacion.md` con algún contenido. Puede comprobar que ambos tienen contenido, el cuál ha sido generado con el chatbot de IA generativa ChatGPT.
@@ -157,7 +157,7 @@ En este punto también se pide rellenar los archivos `despliegue.md` e `instalac
 1. **Inicialización del repositorio en GitHub.** En este punto, debemos crear el repositorio remoto en GitHub para subir el contenido de esta documentación. En mi caso, como ya lo he hecho previamente, se muestra una prueba de ello.
 
 <div align="center">
- <img src="../../../img/repo_github/prueba_repo_github_vscode.png" alt="Prueba del repo creado en GitHub"/>
+ <img src="../../img/repo_github/prueba_repo_github_vscode.png" alt="Prueba del repo creado en GitHub"/>
 </div>
 
 Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://github.com/fperez1291/cd_6_2).
@@ -165,13 +165,13 @@ Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://g
 2. **Archivo `.gitignore`.** Se crea un archivo `.gitignore` para que git ignore la carpeta `venv\` junto con su contenido (el entorno virtual).
 
 <div align="center">
- <img src="../../../img/repo_github/archivo_gitignore.png" alt=""/>
+ <img src="../../img/repo_github/archivo_gitignore.png" alt=""/>
 </div>
 
 3. **Primer commit.** Como ya he mencionado, esta documentación ya está subida a GitHub. Sin embargo, se muestra el próximo commit:
 
 <div align="center">
- <img src="../../../img/repo_github/commit_gitignore.png" alt="Prueba - commit del archivo docs/.gitignore"/>
+ <img src="../../img/repo_github/commit_gitignore.png" alt="Prueba - commit del archivo docs/.gitignore"/>
 </div>
 
 ## Paso 6 - Automatización del despliegue: GitHub Actions
@@ -179,7 +179,7 @@ Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://g
 Para automatizar el despliegue en GitHub Actions crearemos un archivo `.github/workflows/deploy.yml` en el directorio raíz dek repositorio.
 
 <div align="center">
- <img src="../../../img/automatizacion_gh_actions/archivo_deploy.png" alt="Archivo .github/workflows/deploy.yml"/>
+ <img src="../../img/automatizacion_gh_actions/archivo_deploy.png" alt="Archivo .github/workflows/deploy.yml"/>
 </div>
 
 ## Paso 7 - Configurando GitHub Actions
@@ -187,11 +187,11 @@ Para automatizar el despliegue en GitHub Actions crearemos un archivo `.github/w
 En este paso deberemos acceder al nuestro repositorio en GitHub, entrar a la sección de configuración del repositorio (`Settings`), desplegar la lista de la opción `Actions`en la barra lateral, seleccionar la opción `General`y en la sección de `General` con nombre `Workflow permissions` se debe seleccionar la opción `Read and write permissions`.
 
 <div align="center">
- <img src="../../../img/config_gh_actions/config_workflow_permissions.png" alt="Configurando los Workflow permissions de GitHub Actions"/>
+ <img src="../../img/config_gh_actions/config_workflow_permissions.png" alt="Configurando los Workflow permissions de GitHub Actions"/>
 </div>
 
 Una vez cambiados los `Workflow permissions`, debe pulsar el botón `Save`para guardar los cambios.
 
 <div align="center">
- <img src="../../../img/config_gh_actions/guardar_cambios.png" alt="Guardar cambios"/>
+ <img src="../../img/config_gh_actions/guardar_cambios.png" alt="Guardar cambios"/>
 </div>
