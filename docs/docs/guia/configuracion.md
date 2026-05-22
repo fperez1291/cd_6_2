@@ -3,7 +3,7 @@
 > [!NOTE]
 > En algunas imágenes se ha censurado la ruta de directorios y archivos de forma parcial por cuestiones de seguridad.
 
-## Instalación de Python
+## Paso previo - Instalación de Python
 
 Para instalar Python debe seguir los pasos siguientes:
 
@@ -15,13 +15,13 @@ Para instalar Python debe seguir los pasos siguientes:
  <img src="../../../img/config_python/python-installer-1.png" alt="python-installer-1"/>
 </div>
 
-3. Pulse el botón `Instalar Python` para continuar. Cuando el instalador termine, se abrirá una terminal como la que se muestra a continuación. 
+3. Pulse el botón `Instalar Python` para continuar. Cuando el instalador termine, se abrirá una terminal como la que se muestra a continuación.
 
 <div align="center">
  <img src="../../../img/config_python/python-manager-terminal.png" alt="python-manager-terminal"/>
 </div>
 
-4. A continuación, pulse `y` a las dos preguntas que le hará el manager de configurción para instalar Python y configurar automáticamente la variable PATH.
+4. A continuación, pulse `y` a las dos preguntas que le hará el manager de configuración para instalar Python y configurar automáticamente la variable PATH.
 
 <div align="center">
  <img src="../../../img/config_python/python-manager-installation.png" alt="python-manager-installation"/>
@@ -33,20 +33,20 @@ Para instalar Python debe seguir los pasos siguientes:
  <img src="../../../img/config_python/python-rechazar-ayuda-online.png" alt="python-rechazar-ayuda-online"/>
 </div>
 
-Para comprobar que la instalación se ha completado correctaemnte, puede ejecutar en la consola el siguiente comando:
+Para comprobar que la instalación se ha completado correctamente, puede ejecutar en la consola el siguiente comando:
 
 ```bash
 python --version
 ```
 
-Si todo está en orden, se mostrará la sigueinte salida: 
+Si todo está en orden, se mostrará la siguiente salida:
 
 ```console
 > python --version
 Python 3.14.5
 ```
 
-## Configuración del Entorno
+## Paso 1 - Configuración del Entorno
 
 1. Creamos el directorio `docs\` y nos posicionamos en él.
 
@@ -66,7 +66,7 @@ Python 3.14.5
  <img src="../../../img/config_entorno/activar_entorno_error_1.png" alt="Error al ejecutar venv\Scripts\activate"/>
 </div>
 
-Para solventarlo, se tiene en cuenta la siguiente información obtenida en una búsqueda de Brave (respuesta proporcionada por Leo, el agente de IA de Brave): 
+Para solventarlo, se tiene en cuenta la siguiente información obtenida en una búsqueda de Brave (respuesta proporcionada por Leo, el agente de IA de Brave):
 
 > [!NOTE]
 > `venv\Scripts\activate` : la ejecución de scripts está deshabilitada en este sistema
@@ -83,7 +83,7 @@ Para solventarlo, se tiene en cuenta la siguiente información obtenida en una b
 > 
 > Si no deseas modificar la política global de PowerShell, una alternativa es cambiar el terminal predeterminado en tu editor (como VS Code) al **Símbolo del sistema (CMD)**, ya que utiliza el script `activate.bat`, el cual no está sujeto a estas restricciones de PowerShell.
 
-Procedemos a seguir los pasos dados por Leo AI y obtenemos el siguiente problema: 
+Procedemos a seguir los pasos dados por Leo AI y obtenemos el siguiente problema:
 
 <div align="center">
  <img src="../../../img/config_entorno/activar_entorno_error_2.png" alt=""/>
@@ -101,9 +101,9 @@ Para solucionarlo, simplemente editamos la carpeta que contiene los corchetes y 
  <img src="../../../img/config_entorno/instalacion_mkdocs_material.png" alt="Instalación de mkdocs y mkdocs-material"/>
 </div>
 
-Con esto ya tenemos el entorno creado, activo y preparado para crear el proyecto MkDocs. 
+Con esto ya tenemos el entorno creado, activo y preparado para crear el proyecto MkDocs.
 
-## Creación del Proyecto MkDocs
+## Paso 2 - Creación del Proyecto MkDocs
 
 Para inicializar el proyecto MkDocs ejecutamos el siguiente comando:
 
@@ -117,9 +117,9 @@ Tras su ejecución, la estructura del proyecto debería tener el siguiente aspec
  <img src="../../../img/config_mkdocs/incializacion_mkdocs.png" alt="Inicialización del proyecto MkDocs"/>
 </div>
 
-## Configuración de MkDocs
+## Paso 3 - Configuración de MkDocs
 
-Para configurar el MkDocs, insertamos el fragmento siguiente en el archivo `mkdocs.yml`, configurando así el tema Material. 
+Para configurar el MkDocs, insertamos el fragmento siguiente en el archivo `mkdocs.yml`, configurando así el tema Material.
 
 ```yml
 site_name: Mi Documentación
@@ -136,7 +136,7 @@ theme:
  <img src="../../../img/config_mkdocs/config_mkdocs_yml.png" alt="Configuración del archivo mkdocs.yml"/>
 </div>
 
-## Creación de la Estructura de Documentación
+## Paso 4 - Creación de la Estructura de Documentación
 
 Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado.
 
@@ -144,10 +144,34 @@ Pasamos a crear la estructura de directorios y archivos mostrada en el enunciado
  <img src="../../../img/estructura_doc/estructura.png" alt="Estructura de directorios y archivos resultante"/>
 </div>
 
-A continuación se edita el archivo `docs\index.md`: 
+A continuación se edita el archivo `docs\index.md`:
 
 <div align="center">
  <img src="../../../img/estructura_doc/archivo_index.png" alt="Contenido del archivo index.md"/>
 </div>
 
-En este punto también se pide 
+En este punto también se pide rellenar los archivos `despliegue.md` e `instalacion.md` con algún contenido. Puede comprobar que ambos tienen contenido, el cuál ha sido generado con el chatbot de IA generativa ChatGPT.
+
+## Paso 5 - Creación del repositorio en GitHub
+
+1. **Inicialización del repositorio en GitHub.** En este punto, debemos crear el repositorio remoto en GitHub para subir el contenido de esta documentación. En mi caso, como ya lo he hecho previamente, se muestra una prueba de ello.
+
+<div align="center">
+ <img src="../../../img/repo_github/prueba_repo_github_vscode.png" alt="Prueba del repo creado en GitHub"/>
+</div>
+
+Puede acceder al repositorio remoto haciendo click sobre [este enlace](https://github.com/fperez1291/cd_6_2).
+
+2. **Archivo `.gitignore`.** Se crea un archivo `.gitignore` para que git ignore la carpeta `venv\` junto con su contenido (el entorno virtual).
+
+<div align="center">
+ <img src="../../../img/repo_github/archivo_gitignore.png" alt=""/>
+</div>
+
+3. **Primer commit.** Como ya he mencionado, esta documentación ya está subida a GitHub. Sin embargo, se muestra el próximo commit:
+
+<div align="center">
+ <img src="../../../img/repo_github/commit_gitignore.png" alt="Prueba - commit del archivo docs/.gitignore"/>
+</div>
+
+
